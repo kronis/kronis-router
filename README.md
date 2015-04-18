@@ -38,3 +38,10 @@ router.setBeforeRoute(beforeFunction);
 router.executeMultipleRoutes(true);
 router.start();
 ```
+
+#### Tests
+Run tests with BusterJs
+```bash
+buster-server -c
+buster-test
+```
