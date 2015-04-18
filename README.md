@@ -2,19 +2,20 @@
 Lightweight js router
 
 #### Methods
-Method | Argument | Description
-start | todo | todo
-addRoute | todo | todo
-addRoutes | todo | todo
-getRoutes | todo | todo
-setNotFoundRoute | todo | todo
-setBeforeRoute | todo | todo
-trigger | todo | todo
-executeMultipleRoutes | todo | todo
+| Method | Argument | Description |
+| ------------- |-------------| -----|
+| addRoute | todo | todo |
+| addRoutes | todo | todo |
+| getRoutes | todo | todo |
+| setNotFoundRoute | todo | todo |
+| setBeforeRoute | todo | todo |
+| trigger | todo | todo |
+| executeMultipleRoutes | todo | todo |
 
 #### Functions on Router function
-Function | Arguments | Description
-isActiveRoute | todo | todo
+| Function | Arguments | Description |
+| ------------- |-------------| -----|
+| isActiveRoute | todo | todo | 
 
 ##### Examples
 ```javascript
