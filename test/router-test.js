@@ -256,4 +256,23 @@ describe("Routing tests", function() {
             window.location = '#page26';
         }, 1);
     });
+
+    it('// Enable direct linking', function(done) {
+            });
+
+});
+
+describe('//Base url tests', function() {
+    it('Enable executeOnRootPath', function() {
+        window.location = '';
+        console.log('----');
+        var router = getRouter();
+        var spy1 = sinon.spy();
+        var page1 = /^page24$/;
+        addRoute(router, page1, spy1);
+        router.start('#page24');
+        setTimeout(function() {
+            assert.isTrue(spy1.called);
+        }, 20);
+    });
 });

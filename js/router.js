@@ -55,22 +55,32 @@ function Router() {
         return returnArray;
     }
 
+    function startupCode(obj) {
+        var hash = window.location.hash.replace('#', '');
+        var matchingRoutes = getMatchingRoutes(hash);
+        if (matchingRoutes.length > 1 && !options.executeMultipleRoutes) {
+            matchingRoutes.splice(1);
+        }
+        if (matchingRoutes.length > 0) {
+            _.each(matchingRoutes, function(route) {
+                prepareRoute(route);
+            });
+        } else if (options.notFoundRoute && _.isFunction(options.notFoundRoute.work)) {
+            obj.trigger(options.notFoundRoute);
+        }
+    }
+
     return {
-        start: function() {
+        start: function(baseHash) {
             window.onhashchange = function(e) {
-                var hash = window.location.hash.replace('#', '');
-                var matchingRoutes = getMatchingRoutes(hash);
-                if (matchingRoutes.length > 1 && !options.executeMultipleRoutes) {
-                    matchingRoutes.splice(1);
-                }
-                if (matchingRoutes.length > 0) {
-                    _.each(matchingRoutes, function(route) {
-                        prepareRoute(route);
-                    });
-                } else if (options.notFoundRoute && _.isFunction(options.notFoundRoute.work)) {
-                    this.trigger(options.notFoundRoute);
-                }
+                startupCode(this);
             }.bind(this);
+
+            if (baseHash && window.location.hash === '') {
+                window.location = baseHash;
+            } else if (window.location.hash !== '') {
+                startupCode(this);
+            }
         },
         addRoute: function(hash, work) {
             options.routes.push({
