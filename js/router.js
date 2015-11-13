@@ -13,7 +13,7 @@ function Router() {
     }
 
     function prepareRoute(routeWrapper) {
-        if (_.isFunction(options.beforeRoute) && options.beforeRoute.apply()) {
+        if (_.isFunction(options.beforeRoute) && options.beforeRoute.apply(routeWrapper.route, routeWrapper.args)) {
             executeRoute(routeWrapper);
         } else if (!_.isFunction(options.beforeRoute)) {
             executeRoute(routeWrapper);
