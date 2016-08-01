@@ -39,6 +39,28 @@ router.executeMultipleRoutes(true);
 router.start();
 ```
 
+##### Example - BeforePromiseRoute
+```javascript
+var beforePromiseFunction = function() {
+    return new Promise(function(resolve, reject) {
+		someAjaxCall()
+			.then(result => {
+				if (result.shouldBeTrue) {
+					resolve();
+				}
+				reject();
+			})
+			.catch(() => {
+				reject();
+			});
+    });
+};
+
+var router = new Router();
+router.setBeforePromiseRoute(beforePromiseFunction);
+router.start();
+```
+
 #### Tests
 Run tests with BusterJs
 ```bash

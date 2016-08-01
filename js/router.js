@@ -3,6 +3,7 @@ function Router() {
         routes: [],
         notFoundRoute: undefined,
         beforeRoute: undefined,
+        beforePromiseRoute: undefined,
         executeMultipleRoutes: false,
         activeRoute: undefined
     };
@@ -13,7 +14,13 @@ function Router() {
     }
 
     function prepareRoute(routeWrapper) {
-        if (_.isFunction(options.beforeRoute) && options.beforeRoute.apply(routeWrapper.route, routeWrapper.args)) {
+        if (_.isFunction(options.beforePromiseRoute)) {
+            options.beforePromiseRoute.apply(routeWrapper.route, routeWrapper.args).then(function() {
+                executeRoute(routeWrapper);
+            }).catch(function() {
+                console.log('BeforePromiseRoute was rejected');
+            });
+        } else if (_.isFunction(options.beforeRoute) && options.beforeRoute.apply(routeWrapper.route, routeWrapper.args)) {
             executeRoute(routeWrapper);
         } else if (!_.isFunction(options.beforeRoute)) {
             executeRoute(routeWrapper);
@@ -107,6 +114,9 @@ function Router() {
         },
         setBeforeRoute: function(func) {
             options.beforeRoute = func;
+        },
+        setBeforePromiseRoute: function(func) {
+            options.beforePromiseRoute = func;
         },
         trigger: function(route) {
             prepareRoute({
