@@ -5,7 +5,7 @@ config["My tests"] = {
     rootPath: "../",
     sources: [
         "node_modules/underscore/underscore.js",
-        "js/router.js"
+        "js/dist/router.js"
     ],
     tests: [
         "test/*-test.js"

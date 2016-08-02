@@ -38,6 +38,15 @@ gulp.task('browserify', function(done) {
         }))
         .pipe(gulp.dest('./js/dist'));
 });
+gulp.task('browserify-test', function(done) {
+    // Single entry point to browserify
+    return gulp.src('./js/main.js')
+        .pipe(browserify({
+            insertGlobals: true,
+            debug: true
+        }))
+        .pipe(gulp.dest('./js/dist'));
+});
 
 gulp.task("test", function() {
     gulp
@@ -54,8 +63,10 @@ gulp.task("test", function() {
         }));
 });
 
+// Build
+gulp.task('build', ['browserify']);
 // Build for testing
-gulp.task('default', ['browser-sync'], function() {
+gulp.task('default', ['browserify-test', 'browser-sync'], function() {
     gulp.watch('./index.html').on('change', browserSync.reload);
     gulp.watch('./css/*.css').on('change', browserSync.reload);
     gulp.watch('./js/*.js').on('change', browserSync.reload);

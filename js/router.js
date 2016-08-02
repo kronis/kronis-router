@@ -1,4 +1,6 @@
-function Router() {
+var _ = require('lodash');
+
+var router = function() {
     var options = {
         routes: [],
         notFoundRoute: undefined,
@@ -133,3 +135,4 @@ function Router() {
         }
     };
 }
+module.exports = router();

@@ -3,6 +3,8 @@ var assert = buster.referee.assert;
 buster.spec.expose(); // Make some functions global
 
 function getRouter() {
+    debugger;
+    console.log(router);
     return new Router();
 }
 
