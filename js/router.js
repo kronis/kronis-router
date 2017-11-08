@@ -86,7 +86,7 @@ var router = function() {
             }.bind(this);
 
             if (baseHash && window.location.hash === '') {
-                window.location = baseHash;
+                window.location.replace(baseHash);
             } else if (window.location.hash !== '') {
                 startupCode(this);
             }
